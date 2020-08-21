@@ -1,5 +1,7 @@
 package org.launchcode.java.studios.charactercount;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -8,12 +10,21 @@ public class CharacterCount {
 
     public static void main(String[] args) {
 
-        Scanner input = new Scanner(System.in);                 //Declare Scanner type variable to get user input
-        System.out.println("Enter a word for character count: ");
+//        Scanner input = new Scanner(System.in);                 //Declare Scanner type variable to get user input
+//        System.out.println("Enter a word for character count: ");
 
-        String userInput = input.next().toLowerCase();          //Convert userInput to lowercase to mae it case-insensitive
+        //Super-bonus mission
+        String text = "";                                               //Declare text variable of String type
+        try {                                                           //Use exception handling for file reading
+            Scanner input = new Scanner(new File("text.txt")); //Use Scanner to read text from external file
+            text = input.nextLine();
+        } catch (FileNotFoundException e) {                             //Throw error if file not found
+            e.printStackTrace();
+        }
 
-        char[] charactersInString = userInput.toCharArray();    //Convert userInput to an array of characters
+        text = text.toLowerCase();          //Convert userInput to lowercase to mae it case-insensitive
+
+        char[] charactersInString = text.toCharArray();    //Convert userInput to an array of characters
 
         HashMap<Character, Integer> count = new HashMap<>();    //Use HashMap and declare variable of count
 
